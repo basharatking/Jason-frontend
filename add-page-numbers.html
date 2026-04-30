@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Page Numbers — JasonPDF</title>
+<meta name="description" content="Free online PDF page numbering — add page numbers to PDF files. Choose position, format and start number. No signup.">
+<meta name="keywords" content="add page numbers, free pdf tool, online pdf, jasonpdf, no signup">
+<meta name="robots" content="index, follow">
+<meta name="author" content="JasonPDF">
+<meta name="theme-color" content="#FF3814">
+<link rel="canonical" href="https://jasonpdf.com/add-page-numbers.html">
+<meta property="og:title" content="Add Page Numbers — JasonPDF">
+<meta property="og:description" content="Free online PDF page numbering — add page numbers to PDF files. Choose position, format and start number. No signup.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jasonpdf.com/add-page-numbers.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Add Page Numbers — JasonPDF">
+<meta name="twitter:description" content="Free online PDF page numbering — add page numbers to PDF files. Choose position, format and start number. No signup.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"JasonPDF Add Page Numbers","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://jasonpdf.com/add-page-numbers.html"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<script src="config.js"></script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<div class="tool-page">
+  <div class="tool-container">
+    <div class="tool-header">
+      <div class="tool-icon-wrap">🔢</div>
+      <h1 class="tool-title">Add Page Numbers</h1>
+      <p class="tool-sub">Automatically add page numbers to every page of your PDF.</p>
+    </div>
+    
+<div class="tool-card">
+  <div class="upload-zone" onclick="document.getElementById('fi-pgnums').click()">
+    <div class="uz-icon">🔢</div>
+    <div class="uz-title">Drop your PDF here or click to browse</div>
+    <div class="uz-sub">Supports PDF files up to 25 MB</div>
+    <div class="uz-badge">🔒 Processed securely</div>
+    <input class="file-input" id="fi-pgnums" type="file" accept=".pdf" onchange="handleFiles('pgnums',this)">
+  </div>
+  <div class="file-chips" id="fl-pgnums"></div>
+  <div class="pdf-preview-area" id="preview-pgnums"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
+  <label class="f-label">Position</label>
+  <select class="f-select" id="pn-pos">
+    <option value="bottom-center" selected>Bottom center</option>
+    <option value="bottom-right">Bottom right</option>
+    <option value="bottom-left">Bottom left</option>
+    <option value="top-center">Top center</option>
+    <option value="top-right">Top right</option>
+  </select>
+  <label class="f-label">Format</label>
+  <select class="f-select" id="pn-format">
+    <option value="number" selected>1, 2, 3 …</option>
+    <option value="page_of">Page 1 of N</option>
+    <option value="dashes">— 1 —</option>
+  </select>
+  <label class="f-label">Start Number</label>
+  <input class="f-input" id="pn-start" type="number" value="1" min="1">
+  <button class="action-btn" id="btn-pgnums" onclick="run_pgnums()">🔢 Add Page Numbers</button>
+  <div class="progress-wrap" id="pw-pgnums"><div class="progress-track"><div class="progress-fill" id="pb-pgnums"></div></div><div class="progress-label" id="pl-pgnums">Adding numbers…</div></div>
+  <div class="result-box" id="rb-pgnums"><p id="rb-pgnums-msg"></p></div>
+</div>
+
+    <div class="tool-footer-links">
+      <p>More free PDF tools:</p>
+      <div class="tfl-grid">
+        <a href="merge-pdf.html" class="tfl-link">📎 Merge PDF</a>
+<a href="split-pdf.html" class="tfl-link">✂️ Split PDF</a>
+<a href="compress-pdf.html" class="tfl-link">🗜️ Compress PDF</a>
+<a href="rotate-pdf.html" class="tfl-link">🔄 Rotate PDF</a>
+<a href="pdf-to-word.html" class="tfl-link">📝 PDF to Word</a>
+<a href="pdf-to-excel.html" class="tfl-link">📊 PDF to Excel</a>
+<a href="pdf-to-jpg.html" class="tfl-link">🖼️ PDF to JPG</a>
+<a href="jpg-to-pdf.html" class="tfl-link">📥 Image to PDF</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+<script>
+async function run_pgnums(){
+  const files=fileStore["pgnums"];
+  if(!files||!files[0]){showResult("pgnums","Please select a PDF file.",true);return;}
+  setBtnState("pgnums",true);
+  const fd=new FormData();
+  fd.append("file",files[0]);
+  fd.append("position",document.getElementById("pn-pos").value);
+  fd.append("format",document.getElementById("pn-format").value);
+  fd.append("start",document.getElementById("pn-start").value);
+  try{
+    const r=await callAPI("/add-page-numbers",fd,"pgnums","Numbering pages…");
+    const blob=await r.blob();
+    showResult("pgnums","Page numbers added successfully!");
+    showDownloadBtn("pgnums",blob,"numbered_"+files[0].name);
+  }catch(e){showResult("pgnums",e.message,true);}
+  finally{setBtnState("pgnums",false,"🔢 Add Page Numbers");hideProgress("pgnums");}
+}
+</script>
+</body>
+</html>

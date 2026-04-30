@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compress PDF — JasonPDF</title>
+<meta name="description" content="Free online PDF compressor — reduce PDF file size without losing quality. Three compression levels. No signup.">
+<meta name="keywords" content="compress pdf, free pdf tool, online pdf, jasonpdf, no signup">
+<meta name="robots" content="index, follow">
+<meta name="author" content="JasonPDF">
+<meta name="theme-color" content="#FF3814">
+<link rel="canonical" href="https://jasonpdf.com/compress-pdf.html">
+<meta property="og:title" content="Compress PDF — JasonPDF">
+<meta property="og:description" content="Free online PDF compressor — reduce PDF file size without losing quality. Three compression levels. No signup.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jasonpdf.com/compress-pdf.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Compress PDF — JasonPDF">
+<meta name="twitter:description" content="Free online PDF compressor — reduce PDF file size without losing quality. Three compression levels. No signup.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"JasonPDF Compress Tool","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://jasonpdf.com/compress-pdf.html"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<script src="config.js"></script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<div class="tool-page">
+  <div class="tool-container">
+    <div class="tool-header">
+      <div class="tool-icon-wrap">🗜️</div>
+      <h1 class="tool-title">Compress PDF</h1>
+      <p class="tool-sub">Reduce PDF file size while maintaining acceptable quality.</p>
+    </div>
+    
+<div class="tool-card">
+  <div class="upload-zone" onclick="document.getElementById('fi-compress').click()">
+    <div class="uz-icon">🗜️</div>
+    <div class="uz-title">Drop your PDF here or click to browse</div>
+    <div class="uz-sub">Supports PDF files up to 25 MB</div>
+    <div class="uz-badge">🔒 Processed securely</div>
+    <input class="file-input" id="fi-compress" type="file" accept=".pdf" onchange="handleFiles('compress',this)">
+  </div>
+  <div class="file-chips" id="fl-compress"></div>
+  <div class="pdf-preview-area" id="preview-compress"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
+  <label class="f-label">Compression Level</label>
+  <select class="f-select" id="compress-level">
+    <option value="low">Low — best quality, smaller reduction</option>
+    <option value="medium" selected>Medium — balanced quality &amp; size</option>
+    <option value="high">High — smallest file, reduced quality</option>
+  </select>
+  <div id="ocr-hint-compress"></div>
+  <button class="action-btn" id="btn-compress" onclick="run_compress()">🗜️ Compress PDF</button>
+  <div class="progress-wrap" id="pw-compress"><div class="progress-track"><div class="progress-fill" id="pb-compress"></div></div><div class="progress-label" id="pl-compress">Compressing…</div></div>
+  <div class="result-box" id="rb-compress"><p id="rb-compress-msg"></p></div>
+</div>
+
+    <div class="tool-footer-links">
+      <p>More free PDF tools:</p>
+      <div class="tfl-grid">
+        <a href="merge-pdf.html" class="tfl-link">📎 Merge PDF</a>
+<a href="split-pdf.html" class="tfl-link">✂️ Split PDF</a>
+<a href="rotate-pdf.html" class="tfl-link">🔄 Rotate PDF</a>
+<a href="pdf-to-word.html" class="tfl-link">📝 PDF to Word</a>
+<a href="pdf-to-excel.html" class="tfl-link">📊 PDF to Excel</a>
+<a href="pdf-to-jpg.html" class="tfl-link">🖼️ PDF to JPG</a>
+<a href="jpg-to-pdf.html" class="tfl-link">📥 Image to PDF</a>
+<a href="protect-pdf.html" class="tfl-link">🔐 Protect PDF</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+<script>
+async function run_compress(){
+  const files=fileStore["compress"];
+  if(!files||!files[0]){showResult("compress","Please select a PDF file.",true);return;}
+  setBtnState("compress",true);
+  const fd=new FormData();
+  fd.append("file",files[0]);
+  fd.append("level",document.getElementById("compress-level").value);
+  try{
+    const r=await callAPI("/compress-pdf",fd,"compress","Compressing…");
+    const orig=r.headers.get("X-Original-Size");
+    const comp=r.headers.get("X-Compressed-Size");
+    const pct=r.headers.get("X-Savings-Pct");
+    const blob=await r.blob();
+    const msg=pct?`Compressed! Saved ${pct}% (${_bytes(Number(orig))} → ${_bytes(Number(comp))})`:"Compressed successfully!";
+    showResult("compress",msg);
+    showDownloadBtn("compress",blob,"compressed_"+files[0].name);
+  }catch(e){showResult("compress",e.message,true);}
+  finally{setBtnState("compress",false,"🗜️ Compress PDF");hideProgress("compress");}
+}
+</script>
+</body>
+</html>

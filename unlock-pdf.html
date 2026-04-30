@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unlock PDF — JasonPDF</title>
+<meta name="description" content="Free online PDF unlocker — remove password protection from PDF files. Enter your password to unlock. No signup.">
+<meta name="keywords" content="unlock pdf, free pdf tool, online pdf, jasonpdf, no signup">
+<meta name="robots" content="index, follow">
+<meta name="author" content="JasonPDF">
+<meta name="theme-color" content="#FF3814">
+<link rel="canonical" href="https://jasonpdf.com/unlock-pdf.html">
+<meta property="og:title" content="Unlock PDF — JasonPDF">
+<meta property="og:description" content="Free online PDF unlocker — remove password protection from PDF files. Enter your password to unlock. No signup.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jasonpdf.com/unlock-pdf.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Unlock PDF — JasonPDF">
+<meta name="twitter:description" content="Free online PDF unlocker — remove password protection from PDF files. Enter your password to unlock. No signup.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"JasonPDF Unlock Tool","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://jasonpdf.com/unlock-pdf.html"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<script src="config.js"></script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<div class="tool-page">
+  <div class="tool-container">
+    <div class="tool-header">
+      <div class="tool-icon-wrap">🔓</div>
+      <h1 class="tool-title">Unlock PDF</h1>
+      <p class="tool-sub">Remove password protection from a PDF file.</p>
+    </div>
+    
+<div class="tool-card">
+  <div class="notice notice-amber"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Only use this tool on PDFs you own or have permission to unlock.</div>
+  <div class="upload-zone" onclick="document.getElementById('fi-unlock').click()">
+    <div class="uz-icon">🔓</div>
+    <div class="uz-title">Drop your PDF here or click to browse</div>
+    <div class="uz-sub">Supports password-protected PDF files up to 25 MB</div>
+    <div class="uz-badge">🔒 Processed securely</div>
+    <input class="file-input" id="fi-unlock" type="file" accept=".pdf" onchange="handleFiles('unlock',this)">
+  </div>
+  <div class="file-chips" id="fl-unlock"></div>
+  <label class="f-label">PDF Password (if required)</label>
+  <input class="f-input" id="unlock-pw" type="password" placeholder="Enter password or leave blank if not set">
+  <button class="action-btn" id="btn-unlock" onclick="run_unlock()">🔓 Unlock PDF</button>
+  <div class="progress-wrap" id="pw-unlock"><div class="progress-track"><div class="progress-fill" id="pb-unlock"></div></div><div class="progress-label" id="pl-unlock">Unlocking…</div></div>
+  <div class="result-box" id="rb-unlock"><p id="rb-unlock-msg"></p></div>
+</div>
+
+    <div class="tool-footer-links">
+      <p>More free PDF tools:</p>
+      <div class="tfl-grid">
+        <a href="merge-pdf.html" class="tfl-link">📎 Merge PDF</a>
+<a href="split-pdf.html" class="tfl-link">✂️ Split PDF</a>
+<a href="compress-pdf.html" class="tfl-link">🗜️ Compress PDF</a>
+<a href="rotate-pdf.html" class="tfl-link">🔄 Rotate PDF</a>
+<a href="pdf-to-word.html" class="tfl-link">📝 PDF to Word</a>
+<a href="pdf-to-excel.html" class="tfl-link">📊 PDF to Excel</a>
+<a href="pdf-to-jpg.html" class="tfl-link">🖼️ PDF to JPG</a>
+<a href="jpg-to-pdf.html" class="tfl-link">📥 Image to PDF</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+<script>
+async function run_unlock(){
+  const files=fileStore["unlock"];
+  if(!files||!files[0]){showResult("unlock","Please select a PDF file.",true);return;}
+  setBtnState("unlock",true);
+  const fd=new FormData();
+  fd.append("file",files[0]);
+  fd.append("password",document.getElementById("unlock-pw").value);
+  try{
+    const r=await callAPI("/unlock-pdf",fd,"unlock","Unlocking…");
+    const blob=await r.blob();
+    showResult("unlock","PDF unlocked successfully!");
+    showDownloadBtn("unlock",blob,"unlocked_"+files[0].name);
+  }catch(e){showResult("unlock",e.message,true);}
+  finally{setBtnState("unlock",false,"🔓 Unlock PDF");hideProgress("unlock");}
+}
+</script>
+</body>
+</html>

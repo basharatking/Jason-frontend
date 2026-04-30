@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Split PDF — JasonPDF</title>
+<meta name="description" content="Free online PDF splitter — extract individual pages or split a PDF into multiple files. No signup required.">
+<meta name="keywords" content="split pdf, free pdf tool, online pdf, jasonpdf, no signup">
+<meta name="robots" content="index, follow">
+<meta name="author" content="JasonPDF">
+<meta name="theme-color" content="#FF3814">
+<link rel="canonical" href="https://jasonpdf.com/split-pdf.html">
+<meta property="og:title" content="Split PDF — JasonPDF">
+<meta property="og:description" content="Free online PDF splitter — extract individual pages or split a PDF into multiple files. No signup required.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jasonpdf.com/split-pdf.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Split PDF — JasonPDF">
+<meta name="twitter:description" content="Free online PDF splitter — extract individual pages or split a PDF into multiple files. No signup required.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"JasonPDF Split Tool","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://jasonpdf.com/split-pdf.html"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<script src="config.js"></script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<div class="tool-page">
+  <div class="tool-container">
+    <div class="tool-header">
+      <div class="tool-icon-wrap">✂️</div>
+      <h1 class="tool-title">Split PDF</h1>
+      <p class="tool-sub">Extract pages from a PDF or split it into separate files.</p>
+    </div>
+    
+<div class="tool-card">
+  <div class="notice notice-blue"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Files deleted immediately after processing.</div>
+  <div class="upload-zone" onclick="document.getElementById('fi-split').click()">
+    <div class="uz-icon">✂️</div>
+    <div class="uz-title">Drop your PDF here or click to browse</div>
+    <div class="uz-sub">Supports PDF files up to 25 MB</div>
+    <div class="uz-badge">🔒 Processed securely</div>
+    <input class="file-input" id="fi-split" type="file" accept=".pdf" onchange="handleFiles('split',this)">
+  </div>
+  <div class="file-chips" id="fl-split"></div>
+  <div class="pdf-preview-area" id="preview-split"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
+  <label class="f-label">Split Mode</label>
+  <select class="f-select" id="split-mode" onchange="toggleSplitMode()">
+    <option value="each">Split into individual pages (ZIP)</option>
+    <option value="range">Extract page range</option>
+  </select>
+  <div id="split-range-opts" style="display:none">
+    <div class="range-row" style="margin-top:.75rem">
+      <div><label class="f-label">Start Page</label><input class="f-input" id="split-start" type="number" value="1" min="1"></div>
+      <div><label class="f-label">End Page</label><input class="f-input" id="split-end" type="number" value="1" min="1"></div>
+    </div>
+    <span id="split-page-info" style="display:none;font-size:12px;color:var(--ink4);margin-top:6px;background:var(--bg3);padding:4px 10px;border-radius:100px;border:1px solid var(--border)"></span>
+  </div>
+  <div id="ocr-hint-split"></div>
+  <button class="action-btn" id="btn-split" onclick="run_split()">✂️ Split PDF</button>
+  <div class="progress-wrap" id="pw-split"><div class="progress-track"><div class="progress-fill" id="pb-split"></div></div><div class="progress-label" id="pl-split">Processing…</div></div>
+  <div class="result-box" id="rb-split"><p id="rb-split-msg"></p></div>
+</div>
+
+    <div class="tool-footer-links">
+      <p>More free PDF tools:</p>
+      <div class="tfl-grid">
+        <a href="merge-pdf.html" class="tfl-link">📎 Merge PDF</a>
+<a href="compress-pdf.html" class="tfl-link">🗜️ Compress PDF</a>
+<a href="rotate-pdf.html" class="tfl-link">🔄 Rotate PDF</a>
+<a href="pdf-to-word.html" class="tfl-link">📝 PDF to Word</a>
+<a href="pdf-to-excel.html" class="tfl-link">📊 PDF to Excel</a>
+<a href="pdf-to-jpg.html" class="tfl-link">🖼️ PDF to JPG</a>
+<a href="jpg-to-pdf.html" class="tfl-link">📥 Image to PDF</a>
+<a href="protect-pdf.html" class="tfl-link">🔐 Protect PDF</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+<script>
+function toggleSplitMode(){
+  const m=document.getElementById("split-mode").value;
+  document.getElementById("split-range-opts").style.display=m==="range"?"block":"none";
+}
+async function run_split(){
+  const files=fileStore["split"];
+  if(!files||!files[0]){showResult("split","Please select a PDF file.",true);return;}
+  setBtnState("split",true);
+  const mode=document.getElementById("split-mode").value;
+  const fd=new FormData();
+  fd.append("file",files[0]);
+  fd.append("mode",mode);
+  if(mode==="range"){
+    fd.append("start_page",document.getElementById("split-start").value);
+    fd.append("end_page",document.getElementById("split-end").value);
+  }
+  try{
+    const r=await callAPI("/split-pdf",fd,"split","Splitting PDF…");
+    const blob=await r.blob();
+    const ext=mode==="range"?".pdf":".zip";
+    const fname=mode==="range"?"split_range.pdf":"split_pages.zip";
+    showResult("split",mode==="range"?"Page range extracted!":"PDF split into individual pages!");
+    showDownloadBtn("split",blob,fname);
+  }catch(e){showResult("split",e.message,true);}
+  finally{setBtnState("split",false,"✂️ Split PDF");hideProgress("split");}
+}
+</script>
+</body>
+</html>

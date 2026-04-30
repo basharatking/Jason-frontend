@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDF to PowerPoint — JasonPDF</title>
+<meta name="description" content="Free online PDF to PowerPoint converter — convert PDF to PPTX slides. One slide per page. No signup required.">
+<meta name="keywords" content="pdf to powerpoint, free pdf tool, online pdf, jasonpdf, no signup">
+<meta name="robots" content="index, follow">
+<meta name="author" content="JasonPDF">
+<meta name="theme-color" content="#FF3814">
+<link rel="canonical" href="https://jasonpdf.com/pdf-to-pptx.html">
+<meta property="og:title" content="PDF to PowerPoint — JasonPDF">
+<meta property="og:description" content="Free online PDF to PowerPoint converter — convert PDF to PPTX slides. One slide per page. No signup required.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jasonpdf.com/pdf-to-pptx.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PDF to PowerPoint — JasonPDF">
+<meta name="twitter:description" content="Free online PDF to PowerPoint converter — convert PDF to PPTX slides. One slide per page. No signup required.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"JasonPDF to PowerPoint Converter","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://jasonpdf.com/pdf-to-pptx.html"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<script src="config.js"></script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<div class="tool-page">
+  <div class="tool-container">
+    <div class="tool-header">
+      <div class="tool-icon-wrap">📽️</div>
+      <h1 class="tool-title">PDF to PowerPoint</h1>
+      <p class="tool-sub">Convert PDF pages into editable PowerPoint slides.</p>
+    </div>
+    
+<div class="tool-card">
+  <div class="notice notice-blue"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Each PDF page becomes one slide. Text-based PDFs convert best — scanned PDFs may have limited text.</div>
+  <div class="upload-zone" onclick="document.getElementById('fi-pptx').click()">
+    <div class="uz-icon">📽️</div>
+    <div class="uz-title">Drop your PDF here or click to browse</div>
+    <div class="uz-sub">Supports PDF files up to 25 MB</div>
+    <div class="uz-badge">🔒 Processed securely</div>
+    <input class="file-input" id="fi-pptx" type="file" accept=".pdf" onchange="handleFiles('pptx',this)">
+  </div>
+  <div class="file-chips" id="fl-pptx"></div>
+  <div class="pdf-preview-area" id="preview-pptx"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
+  <div id="ocr-hint-pptx"></div>
+  <button class="action-btn" id="btn-pptx" onclick="run_pptx()">📽️ Convert to PowerPoint</button>
+  <div class="progress-wrap" id="pw-pptx"><div class="progress-track"><div class="progress-fill" id="pb-pptx"></div></div><div class="progress-label" id="pl-pptx">Converting…</div></div>
+  <div class="result-box" id="rb-pptx"><p id="rb-pptx-msg"></p></div>
+</div>
+
+    <div class="tool-footer-links">
+      <p>More free PDF tools:</p>
+      <div class="tfl-grid">
+        <a href="merge-pdf.html" class="tfl-link">📎 Merge PDF</a>
+<a href="split-pdf.html" class="tfl-link">✂️ Split PDF</a>
+<a href="compress-pdf.html" class="tfl-link">🗜️ Compress PDF</a>
+<a href="rotate-pdf.html" class="tfl-link">🔄 Rotate PDF</a>
+<a href="pdf-to-word.html" class="tfl-link">📝 PDF to Word</a>
+<a href="pdf-to-excel.html" class="tfl-link">📊 PDF to Excel</a>
+<a href="pdf-to-jpg.html" class="tfl-link">🖼️ PDF to JPG</a>
+<a href="jpg-to-pdf.html" class="tfl-link">📥 Image to PDF</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+<script>
+async function run_pptx(){
+  const files=fileStore["pptx"];
+  if(!files||!files[0]){showResult("pptx","Please select a PDF file.",true);return;}
+  setBtnState("pptx",true);
+  const fd=new FormData();
+  fd.append("file",files[0]);
+  try{
+    const r=await callAPI("/pdf-to-pptx",fd,"pptx","Converting to slides…");
+    const blob=await r.blob();
+    const name=files[0].name.replace(/\.pdf$/i,"")+".pptx";
+    showResult("pptx","Converted to PowerPoint successfully!");
+    showDownloadBtn("pptx",blob,name);
+  }catch(e){showResult("pptx",e.message,true);}
+  finally{setBtnState("pptx",false,"📽️ Convert to PowerPoint");hideProgress("pptx");}
+}
+</script>
+</body>
+</html>

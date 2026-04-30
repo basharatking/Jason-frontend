@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rotate PDF — JasonPDF</title>
+<meta name="description" content="Free online PDF rotator — rotate PDF pages 90, 180 or 270 degrees. Choose all, odd or even pages. No signup.">
+<meta name="keywords" content="rotate pdf, free pdf tool, online pdf, jasonpdf, no signup">
+<meta name="robots" content="index, follow">
+<meta name="author" content="JasonPDF">
+<meta name="theme-color" content="#FF3814">
+<link rel="canonical" href="https://jasonpdf.com/rotate-pdf.html">
+<meta property="og:title" content="Rotate PDF — JasonPDF">
+<meta property="og:description" content="Free online PDF rotator — rotate PDF pages 90, 180 or 270 degrees. Choose all, odd or even pages. No signup.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jasonpdf.com/rotate-pdf.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Rotate PDF — JasonPDF">
+<meta name="twitter:description" content="Free online PDF rotator — rotate PDF pages 90, 180 or 270 degrees. Choose all, odd or even pages. No signup.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"JasonPDF Rotate Tool","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://jasonpdf.com/rotate-pdf.html"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<script src="config.js"></script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<div class="tool-page">
+  <div class="tool-container">
+    <div class="tool-header">
+      <div class="tool-icon-wrap">🔄</div>
+      <h1 class="tool-title">Rotate PDF</h1>
+      <p class="tool-sub">Rotate all or selected pages by 90, 180 or 270 degrees.</p>
+    </div>
+    
+<div class="tool-card">
+  <div class="upload-zone" onclick="document.getElementById('fi-rotate').click()">
+    <div class="uz-icon">🔄</div>
+    <div class="uz-title">Drop your PDF here or click to browse</div>
+    <div class="uz-sub">Supports PDF files up to 25 MB</div>
+    <div class="uz-badge">🔒 Processed securely</div>
+    <input class="file-input" id="fi-rotate" type="file" accept=".pdf" onchange="handleFiles('rotate',this)">
+  </div>
+  <div class="file-chips" id="fl-rotate"></div>
+  <div class="pdf-preview-area" id="preview-rotate"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
+  <label class="f-label">Rotation Angle</label>
+  <select class="f-select" id="rotate-angle">
+    <option value="90">90° clockwise</option>
+    <option value="180">180° (upside down)</option>
+    <option value="270">270° (90° counter-clockwise)</option>
+  </select>
+  <label class="f-label">Apply to Pages</label>
+  <select class="f-select" id="rotate-pages">
+    <option value="all">All pages</option>
+    <option value="odd">Odd pages only</option>
+    <option value="even">Even pages only</option>
+  </select>
+  <button class="action-btn" id="btn-rotate" onclick="run_rotate()">🔄 Rotate PDF</button>
+  <div class="progress-wrap" id="pw-rotate"><div class="progress-track"><div class="progress-fill" id="pb-rotate"></div></div><div class="progress-label" id="pl-rotate">Rotating…</div></div>
+  <div class="result-box" id="rb-rotate"><p id="rb-rotate-msg"></p></div>
+</div>
+
+    <div class="tool-footer-links">
+      <p>More free PDF tools:</p>
+      <div class="tfl-grid">
+        <a href="merge-pdf.html" class="tfl-link">📎 Merge PDF</a>
+<a href="split-pdf.html" class="tfl-link">✂️ Split PDF</a>
+<a href="compress-pdf.html" class="tfl-link">🗜️ Compress PDF</a>
+<a href="pdf-to-word.html" class="tfl-link">📝 PDF to Word</a>
+<a href="pdf-to-excel.html" class="tfl-link">📊 PDF to Excel</a>
+<a href="pdf-to-jpg.html" class="tfl-link">🖼️ PDF to JPG</a>
+<a href="jpg-to-pdf.html" class="tfl-link">📥 Image to PDF</a>
+<a href="protect-pdf.html" class="tfl-link">🔐 Protect PDF</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+<script>
+async function run_rotate(){
+  const files=fileStore["rotate"];
+  if(!files||!files[0]){showResult("rotate","Please select a PDF file.",true);return;}
+  setBtnState("rotate",true);
+  const fd=new FormData();
+  fd.append("file",files[0]);
+  fd.append("angle",document.getElementById("rotate-angle").value);
+  fd.append("pages",document.getElementById("rotate-pages").value);
+  try{
+    const r=await callAPI("/rotate-pdf",fd,"rotate","Rotating…");
+    const blob=await r.blob();
+    showResult("rotate","PDF rotated successfully!");
+    showDownloadBtn("rotate",blob,"rotated_"+files[0].name);
+  }catch(e){showResult("rotate",e.message,true);}
+  finally{setBtnState("rotate",false,"🔄 Rotate PDF");hideProgress("rotate");}
+}
+</script>
+</body>
+</html>

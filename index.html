@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JasonPDF — Free Online PDF Tools | Merge, Split, Compress & Convert</title>
+<meta name="description" content="JasonPDF: 14+ free online PDF tools. Merge, split, compress, rotate, watermark, and convert PDF to Word, Excel, JPG, PowerPoint. No signup. Files deleted instantly. 100% private.">
+<meta name="keywords" content="free pdf tools, merge pdf, split pdf, compress pdf, pdf to word, pdf to excel, pdf to jpg, rotate pdf, watermark pdf, online pdf editor, jasonpdf">
+<meta name="robots" content="index, follow">
+<meta name="author" content="JasonPDF">
+<meta name="theme-color" content="#FF3814">
+<link rel="canonical" href="https://jasonpdf.com/">
+<!-- Open Graph -->
+<meta property="og:title" content="JasonPDF — Free Online PDF Tools">
+<meta property="og:description" content="14+ free PDF tools. Merge, split, compress, convert. No signup. Files deleted instantly.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jasonpdf.com/">
+<meta property="og:image" content="https://jasonpdf.com/og-image.png">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="JasonPDF — Free Online PDF Tools">
+<meta name="twitter:description" content="14+ free PDF tools. No signup. Files deleted instantly.">
+<!-- Schema.org -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"JasonPDF","description":"Free online PDF tools — merge, split, compress, convert PDF files","url":"https://jasonpdf.com","potentialAction":{"@type":"SearchAction","target":"https://jasonpdf.com/?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"JasonPDF","url":"https://jasonpdf.com","logo":"https://jasonpdf.com/logo.png","sameAs":[]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<script src="config.js"></script>
+<style>
+/* Hero */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:calc(var(--nav-h)+4rem) 2rem 4rem;text-align:center;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(255,56,20,.10) 0%,transparent 70%),radial-gradient(ellipse 50% 40% at 85% 85%,rgba(255,56,20,.06) 0%,transparent 60%);pointer-events:none}
+[data-theme="dark"] .hero-bg{background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(255,56,20,.18) 0%,transparent 70%)}
+.hero-tag{display:inline-flex;align-items:center;gap:7px;background:var(--brand-bg);border:1px solid var(--brand-border);color:var(--brand);font-size:12.5px;font-weight:600;padding:6px 14px;border-radius:100px;margin-bottom:1.5rem;animation:fadeUp .5s ease both}
+.hero h1{font-family:var(--font-d);font-size:clamp(40px,7vw,82px);font-weight:800;color:var(--ink);line-height:1.04;letter-spacing:-2.5px;margin-bottom:1.25rem;animation:fadeUp .5s .08s ease both;max-width:860px}
+.hero h1 em{color:var(--brand);font-style:normal}
+.hero-sub{font-size:clamp(15px,2vw,18px);color:var(--ink3);line-height:1.7;max-width:560px;margin:0 auto 2.25rem;animation:fadeUp .5s .16s ease both}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;animation:fadeUp .5s .24s ease both;margin-bottom:3rem}
+.hero-trust{display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center;animation:fadeUp .5s .32s ease both}
+.trust-item{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink4);font-weight:500}
+.trust-item svg{color:var(--green);flex-shrink:0}
+/* Tool section */
+.tools-section{padding:5rem 2rem}
+.tools-inner{max-width:1200px;margin:0 auto}
+.tools-header{text-align:center;margin-bottom:3rem}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:2.5rem}
+.tab-btn{background:var(--bg2);border:1.5px solid var(--border);color:var(--ink3);padding:8px 18px;border-radius:100px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:var(--font);transition:var(--t)}
+.tab-btn:hover{border-color:var(--brand-border);color:var(--brand);background:var(--brand-bg)}
+.tab-btn.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.tci{background:var(--bg);border:1.5px solid var(--border);border-radius:20px;padding:1.4rem 1.5rem;text-decoration:none;display:flex;align-items:flex-start;gap:14px;transition:var(--t);position:relative;overflow:hidden}
+.tci:hover{border-color:var(--brand-border);transform:translateY(-3px);box-shadow:var(--shadow-lg);background:var(--brand-bg)}
+.tci-icon{width:46px;height:46px;flex-shrink:0;background:var(--brand-bg);border:1px solid var(--brand-border);border-radius:var(--rs);display:flex;align-items:center;justify-content:center;font-size:1.4rem;transition:transform .2s}
+.tci:hover .tci-icon{transform:scale(1.1)}
+.tci-body{flex:1;min-width:0}
+.tci-title{font-size:14.5px;font-weight:700;color:var(--ink);margin-bottom:.25rem}
+.tci-desc{font-size:12.5px;color:var(--ink3);line-height:1.5}
+.tci-badge{position:absolute;top:.85rem;right:.85rem;font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:2px 7px;border-radius:100px;background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+.tci-badge.new{background:var(--accent-bg);color:var(--accent);border-color:var(--accent-border)}
+/* How section */
+.how-section{padding:5rem 2rem;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.how-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem;max-width:900px;margin-left:auto;margin-right:auto}
+.how-step{text-align:center}
+.step-num{width:48px;height:48px;border-radius:50%;background:var(--brand);color:#fff;font-family:var(--font-d);font-size:20px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem}
+.step-icon{font-size:1.8rem;margin-bottom:.75rem}
+.step-title{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:.4rem}
+.step-desc{font-size:13.5px;color:var(--ink3);line-height:1.65}
+/* Features */
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:3rem}
+.feat-card{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:1.5rem}
+.feat-icon{font-size:1.6rem;margin-bottom:.75rem}
+.feat-title{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:.35rem}
+.feat-desc{font-size:13.5px;color:var(--ink3);line-height:1.6}
+/* Stats */
+.stats-section{padding:4rem 2rem;background:var(--ink);color:#fff;text-align:center}
+[data-theme="dark"] .stats-section{background:#050507}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;margin-top:2.5rem;max-width:900px;margin-left:auto;margin-right:auto}
+.stat-num{font-family:var(--font-d);font-size:clamp(32px,5vw,52px);font-weight:800;color:#FF7A5C}
+.stat-label{font-size:14px;color:rgba(255,255,255,.5);margin-top:.25rem;font-weight:500}
+/* Testimonials */
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-top:2.5rem}
+.testi-card{background:var(--bg);border:1.5px solid var(--border);border-radius:20px;padding:1.5rem}
+.testi-stars{color:#F59E0B;font-size:14px;margin-bottom:.75rem}
+.testi-text{font-size:14px;color:var(--ink2);line-height:1.7;margin-bottom:1.1rem;font-style:italic}
+.testi-author{display:flex;align-items:center;gap:10px}
+.testi-av{width:36px;height:36px;border-radius:50%;flex-shrink:0;background:var(--brand-bg);border:1px solid var(--brand-border);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--brand)}
+.testi-name{font-size:13.5px;font-weight:700;color:var(--ink)}
+.testi-role{font-size:12px;color:var(--ink4)}
+/* FAQ */
+.faq-list{margin-top:2.5rem;display:flex;flex-direction:column;max-width:720px;margin-left:auto;margin-right:auto}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{width:100%;background:none;border:none;text-align:left;padding:1.15rem 0;font-size:15px;font-weight:600;color:var(--ink);cursor:pointer;font-family:var(--font);display:flex;justify-content:space-between;align-items:center;gap:1rem;transition:color .15s}
+.faq-q:hover{color:var(--brand)}
+.faq-chevron{flex-shrink:0;transition:transform .25s;color:var(--ink4)}
+.faq-item.open .faq-chevron{transform:rotate(180deg);color:var(--brand)}
+.faq-item.open .faq-q{color:var(--brand)}
+.faq-a{font-size:14px;color:var(--ink3);line-height:1.75;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease;padding-bottom:0}
+.faq-item.open .faq-a{max-height:300px;padding-bottom:1.1rem}
+/* CTA */
+.cta-section{padding:5rem 2rem;text-align:center;background:var(--brand)}
+.cta-section h2{font-family:var(--font-d);font-size:clamp(28px,4vw,42px);font-weight:800;color:#fff;margin-bottom:.75rem;letter-spacing:-.5px}
+.cta-section p{color:rgba(255,255,255,.75);font-size:16px;margin-bottom:2rem}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--brand);padding:14px 32px;border-radius:var(--r);font-size:15px;font-weight:800;border:none;cursor:pointer;transition:var(--t);text-decoration:none}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.2)}
+@media(max-width:760px){.how-steps,.stats-grid{grid-template-columns:1fr 1fr;gap:1.5rem}}
+@media(max-width:500px){.how-steps,.stats-grid{grid-template-columns:1fr}.hero-ctas{flex-direction:column;align-items:center}.hero-ctas .btn-primary,.hero-ctas .btn-outline-hp{width:100%;justify-content:center}}
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div style="position:relative;z-index:1;width:100%">
+    <div class="hero-tag">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      100% Free · No Signup · Files Auto-Deleted
+    </div>
+    <h1>Every PDF tool<br>you'll ever <em>need</em></h1>
+    <p class="hero-sub">Merge, split, compress, convert and more. Fast, private and completely free. Works on any device.</p>
+    <div class="hero-ctas">
+      <a href="#tools" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Try All 14 Tools Free
+      </a>
+      <a href="about.html" class="btn-outline-hp">Learn More →</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>No account needed</div>
+      <div class="trust-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Files deleted instantly</div>
+      <div class="trust-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>14+ PDF tools</div>
+      <div class="trust-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Works on mobile</div>
+    </div>
+  </div>
+</section>
+
+<section class="tools-section" id="tools">
+  <div class="tools-inner">
+    <div class="tools-header">
+      <div class="eyebrow">All Tools</div>
+      <h2 class="section-title">Everything you need for PDFs</h2>
+      <p class="section-sub">Professional tools, completely free. No watermarks, no signup required.</p>
+    </div>
+    <div class="tabs">
+      <button class="tab-btn active" onclick="filterTools('all',this)">All Tools</button>
+      <button class="tab-btn" onclick="filterTools('organize',this)">📂 Organize</button>
+      <button class="tab-btn" onclick="filterTools('convert',this)">🔄 Convert</button>
+      <button class="tab-btn" onclick="filterTools('security',this)">🔒 Security</button>
+    </div>
+    <div class="tools-grid" id="toolsGrid">
+      <a href="merge-pdf.html" class="tci" data-cat="organize"><div class="tci-icon">📎</div><div class="tci-body"><div class="tci-title">Merge PDF</div><div class="tci-desc">Combine multiple PDFs into one file</div></div><span class="tci-badge">Free</span></a>
+      <a href="split-pdf.html" class="tci" data-cat="organize"><div class="tci-icon">✂️</div><div class="tci-body"><div class="tci-title">Split PDF</div><div class="tci-desc">Extract pages or split into separate files</div></div><span class="tci-badge">Free</span></a>
+      <a href="compress-pdf.html" class="tci" data-cat="organize"><div class="tci-icon">🗜️</div><div class="tci-body"><div class="tci-title">Compress PDF</div><div class="tci-desc">Reduce file size without losing quality</div></div><span class="tci-badge">Free</span></a>
+      <a href="rotate-pdf.html" class="tci" data-cat="organize"><div class="tci-icon">🔄</div><div class="tci-body"><div class="tci-title">Rotate PDF</div><div class="tci-desc">Rotate pages 90, 180 or 270 degrees</div></div><span class="tci-badge">Free</span></a>
+      <a href="add-page-numbers.html" class="tci" data-cat="organize"><div class="tci-icon">🔢</div><div class="tci-body"><div class="tci-title">Add Page Numbers</div><div class="tci-desc">Auto-number all pages, pick position & style</div></div><span class="tci-badge">Free</span></a>
+      <a href="watermark-pdf.html" class="tci" data-cat="security"><div class="tci-icon">🔏</div><div class="tci-body"><div class="tci-title">Watermark PDF</div><div class="tci-desc">Add custom text watermark to pages</div></div><span class="tci-badge">Free</span></a>
+      <a href="protect-pdf.html" class="tci" data-cat="security"><div class="tci-icon">🔐</div><div class="tci-body"><div class="tci-title">Protect PDF</div><div class="tci-desc">Add AES-256 password encryption</div></div><span class="tci-badge">Free</span></a>
+      <a href="unlock-pdf.html" class="tci" data-cat="security"><div class="tci-icon">🔓</div><div class="tci-body"><div class="tci-title">Unlock PDF</div><div class="tci-desc">Remove password protection from PDF</div></div><span class="tci-badge">Free</span></a>
+      <a href="pdf-to-word.html" class="tci" data-cat="convert"><div class="tci-icon">📝</div><div class="tci-body"><div class="tci-title">PDF to Word</div><div class="tci-desc">Convert PDF to editable .docx file</div></div><span class="tci-badge">Free</span></a>
+      <a href="pdf-to-excel.html" class="tci" data-cat="convert"><div class="tci-icon">📊</div><div class="tci-body"><div class="tci-title">PDF to Excel</div><div class="tci-desc">Smart multi-sheet table extraction to .xlsx</div></div><span class="tci-badge">Free</span></a>
+      <a href="pdf-to-jpg.html" class="tci" data-cat="convert"><div class="tci-icon">🖼️</div><div class="tci-body"><div class="tci-title">PDF to JPG</div><div class="tci-desc">Convert pages to high-quality images</div></div><span class="tci-badge">Free</span></a>
+      <a href="jpg-to-pdf.html" class="tci" data-cat="convert"><div class="tci-icon">📥</div><div class="tci-body"><div class="tci-title">Image to PDF</div><div class="tci-desc">Convert JPG, PNG and other images to PDF</div></div><span class="tci-badge">Free</span></a>
+      <a href="pdf-to-pptx.html" class="tci" data-cat="convert"><div class="tci-icon">📽️</div><div class="tci-body"><div class="tci-title">PDF to PowerPoint</div><div class="tci-desc">Convert PDF pages to .pptx slides</div></div><span class="tci-badge new">New</span></a>
+      <a href="pdf-to-text.html" class="tci" data-cat="convert"><div class="tci-icon">📄</div><div class="tci-body"><div class="tci-title">PDF to Text</div><div class="tci-desc">Extract raw plain text from any PDF</div></div><span class="tci-badge new">New</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="how-section" id="how">
+  <div style="text-align:center;max-width:1000px;margin:0 auto;padding:0 2rem">
+    <div class="eyebrow">How it works</div>
+    <h2 class="section-title">3 simple steps</h2>
+    <div class="how-steps">
+      <div class="how-step"><div class="step-num">1</div><div class="step-icon">📂</div><div class="step-title">Upload your file</div><div class="step-desc">Drag &amp; drop or click to select. Up to 25 MB on the free plan.</div></div>
+      <div class="how-step"><div class="step-num">2</div><div class="step-icon">⚙️</div><div class="step-title">Choose your tool</div><div class="step-desc">Pick from 14 tools, adjust settings, then click the action button.</div></div>
+      <div class="how-step"><div class="step-num">3</div><div class="step-icon">⬇️</div><div class="step-title">Download result</div><div class="step-desc">Click the green download button — done in seconds. File auto-deleted.</div></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:5rem 2rem">
+  <div style="max-width:1120px;margin:0 auto">
+    <div style="text-align:center"><div class="eyebrow">Why JasonPDF</div><h2 class="section-title">Built for privacy &amp; speed</h2><p class="section-sub">No ads, no tracking. Just clean, fast PDF tools.</p></div>
+    <div class="feat-grid">
+      <div class="feat-card"><div class="feat-icon">🔒</div><div class="feat-title">100% Private</div><div class="feat-desc">Files deleted immediately after processing. Never stored or shared with anyone.</div></div>
+      <div class="feat-card"><div class="feat-icon">⚡</div><div class="feat-title">Lightning Fast</div><div class="feat-desc">Dedicated backend processing. Most operations complete in under 5 seconds.</div></div>
+      <div class="feat-card"><div class="feat-icon">📱</div><div class="feat-title">Works Everywhere</div><div class="feat-desc">Fully responsive — works on mobile, tablet and desktop browsers.</div></div>
+      <div class="feat-card"><div class="feat-icon">🆓</div><div class="feat-title">Always Free</div><div class="feat-desc">All 14 core tools are free. No hidden fees, no watermarks on output.</div></div>
+      <div class="feat-card"><div class="feat-icon">📊</div><div class="feat-title">Smart Excel Export</div><div class="feat-desc">PDF to Excel creates separate sheets per table group automatically.</div></div>
+      <div class="feat-card"><div class="feat-icon">🌐</div><div class="feat-title">No Install Needed</div><div class="feat-desc">Runs in your browser. No downloads, no apps, no extensions required.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="stats-section">
+  <div style="max-width:900px;margin:0 auto">
+    <h2 style="font-family:var(--font-d);font-size:clamp(24px,3vw,36px);font-weight:800;color:#fff;margin-bottom:.5rem">Trusted worldwide</h2>
+    <p style="color:rgba(255,255,255,.55);font-size:15px;margin-bottom:0">Helping people work smarter with PDFs every day</p>
+    <div class="stats-grid">
+      <div><div class="stat-num">14+</div><div class="stat-label">PDF Tools</div></div>
+      <div><div class="stat-num">25MB</div><div class="stat-label">Free File Limit</div></div>
+      <div><div class="stat-num">0</div><div class="stat-label">Signups Required</div></div>
+      <div><div class="stat-num">100%</div><div class="stat-label">Private & Secure</div></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:5rem 2rem">
+  <div style="max-width:1120px;margin:0 auto">
+    <div style="text-align:center"><div class="eyebrow">Testimonials</div><h2 class="section-title">What users say</h2></div>
+    <div class="testi-grid">
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Finally a PDF tool that actually works without signing up. JasonPDF is incredibly fast and the interface is clean and intuitive."</p><div class="testi-author"><div class="testi-av">SM</div><div><div class="testi-name">Sarah M.</div><div class="testi-role">Marketing Manager</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"The PDF to Excel tool is seriously impressive — it detected all my tables and put them in separate sheets automatically. Game changer."</p><div class="testi-author"><div class="testi-av">DJ</div><div><div class="testi-name">David J.</div><div class="testi-role">Financial Analyst</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"I use the compress tool daily for sending large reports. It cuts file size by 60-70% and I can barely tell the difference in quality."</p><div class="testi-author"><div class="testi-av">AP</div><div><div class="testi-name">Aisha P.</div><div class="testi-role">Project Coordinator</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:5rem 2rem;background:var(--bg2);border-top:1px solid var(--border)" id="faq">
+  <div style="max-width:720px;margin:0 auto;text-align:center">
+    <div class="eyebrow">FAQ</div>
+    <h2 class="section-title">Frequently asked questions</h2>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is JasonPDF really free?<svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Yes, completely free. All 14 tools work with no signup, no credit card, and no watermarks on output files. We believe PDF tools should be accessible to everyone.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Are my files kept private?<svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Absolutely. Files are processed on our secure server and deleted immediately after your download. We never store, read or share your documents.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What is the file size limit?<svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">The free plan supports files up to 25 MB. This covers most everyday PDFs. For larger files, try compressing your PDF first.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Does it work on mobile?<svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Yes! JasonPDF is fully responsive and works great on smartphones and tablets. No app download required — just open your browser and go.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Why is it called JasonPDF?<svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">JasonPDF was named after Jason — the son of the developer who built this tool. It's a personal project made with love and shared free with the world.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can I convert scanned PDFs?<svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Scanned PDFs (images only) don't have a text layer, so text extraction tools like PDF to Word may be limited. We'll warn you automatically when a scanned PDF is detected.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>Start using JasonPDF today</h2>
+  <p>14 professional PDF tools, completely free. No signup, no ads.</p>
+  <a href="#tools" class="cta-btn">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+    Open All Tools →
+  </a>
+</section>
+
+<div id="footer-placeholder"></div>
+
+<script src="shared.js"></script>
+<script>
+function filterTools(cat, btn) {
+  document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  document.querySelectorAll(".tci").forEach(c => {
+    c.style.display = (cat === "all" || c.dataset.cat === cat) ? "" : "none";
+  });
+}
+function toggleFaq(btn) {
+  const item = btn.closest(".faq-item");
+  const wasOpen = item.classList.contains("open");
+  document.querySelectorAll(".faq-item.open").forEach(i => i.classList.remove("open"));
+  if (!wasOpen) item.classList.add("open");
+}
+</script>
+</body>
+</html>

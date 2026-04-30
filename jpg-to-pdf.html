@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image to PDF — JasonPDF</title>
+<meta name="description" content="Free online image to PDF converter — convert JPG, PNG, WebP and more to PDF. Multiple images supported. No signup.">
+<meta name="keywords" content="image to pdf, free pdf tool, online pdf, jasonpdf, no signup">
+<meta name="robots" content="index, follow">
+<meta name="author" content="JasonPDF">
+<meta name="theme-color" content="#FF3814">
+<link rel="canonical" href="https://jasonpdf.com/jpg-to-pdf.html">
+<meta property="og:title" content="Image to PDF — JasonPDF">
+<meta property="og:description" content="Free online image to PDF converter — convert JPG, PNG, WebP and more to PDF. Multiple images supported. No signup.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jasonpdf.com/jpg-to-pdf.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Image to PDF — JasonPDF">
+<meta name="twitter:description" content="Free online image to PDF converter — convert JPG, PNG, WebP and more to PDF. Multiple images supported. No signup.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"JasonPDF Image to PDF","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://jasonpdf.com/jpg-to-pdf.html"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<script src="config.js"></script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<div class="tool-page">
+  <div class="tool-container">
+    <div class="tool-header">
+      <div class="tool-icon-wrap">📥</div>
+      <h1 class="tool-title">Image to PDF</h1>
+      <p class="tool-sub">Convert JPG, PNG and other images into a single PDF document.</p>
+    </div>
+    
+<div class="tool-card">
+  <div class="upload-zone" onclick="document.getElementById('fi-img2pdf').click()">
+    <div class="uz-icon">📥</div>
+    <div class="uz-title">Drop images here or click to browse</div>
+    <div class="uz-sub">Supports JPG, PNG, WebP, BMP — multiple files supported</div>
+    <div class="uz-badge">🔒 Processed securely · Max 25 MB each</div>
+    <input class="file-input" id="fi-img2pdf" type="file" accept=".jpg,.jpeg,.png,.webp,.bmp" multiple onchange="handleFiles('img2pdf',this)">
+  </div>
+  <div class="file-chips" id="fl-img2pdf"></div>
+  <button class="action-btn" id="btn-img2pdf" onclick="run_img2pdf()">📥 Convert to PDF</button>
+  <div class="progress-wrap" id="pw-img2pdf"><div class="progress-track"><div class="progress-fill" id="pb-img2pdf"></div></div><div class="progress-label" id="pl-img2pdf">Converting…</div></div>
+  <div class="result-box" id="rb-img2pdf"><p id="rb-img2pdf-msg"></p></div>
+</div>
+
+    <div class="tool-footer-links">
+      <p>More free PDF tools:</p>
+      <div class="tfl-grid">
+        <a href="merge-pdf.html" class="tfl-link">📎 Merge PDF</a>
+<a href="split-pdf.html" class="tfl-link">✂️ Split PDF</a>
+<a href="compress-pdf.html" class="tfl-link">🗜️ Compress PDF</a>
+<a href="rotate-pdf.html" class="tfl-link">🔄 Rotate PDF</a>
+<a href="pdf-to-word.html" class="tfl-link">📝 PDF to Word</a>
+<a href="pdf-to-excel.html" class="tfl-link">📊 PDF to Excel</a>
+<a href="pdf-to-jpg.html" class="tfl-link">🖼️ PDF to JPG</a>
+<a href="protect-pdf.html" class="tfl-link">🔐 Protect PDF</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+<script>
+async function run_img2pdf(){
+  const files=fileStore["img2pdf"];
+  if(!files||!files.length){showResult("img2pdf","Please select at least one image.",true);return;}
+  setBtnState("img2pdf",true);
+  const fd=new FormData();
+  files.forEach(f=>fd.append("files",f));
+  try{
+    const r=await callAPI("/jpg-to-pdf",fd,"img2pdf","Converting images…");
+    const blob=await r.blob();
+    showResult("img2pdf","Images converted to PDF!");
+    showDownloadBtn("img2pdf",blob,"converted.pdf");
+  }catch(e){showResult("img2pdf",e.message,true);}
+  finally{setBtnState("img2pdf",false,"📥 Convert to PDF");hideProgress("img2pdf");}
+}
+</script>
+</body>
+</html>

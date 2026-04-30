@@ -1,4 +1,6 @@
-window.JASONPDF_CONFIG = {
-  API_BASE:      "https://your-backend-url.up.railway.app", // ← Change after deploy
-  FREE_LIMIT_MB: 25,
-};
+<script>
+  window.JASONPDF_CONFIG = {
+    API_BASE: "https://jason-pdf--mrjb54890.replit.app",
+    FREE_LIMIT_MB: 25,
+  };
+</script>
